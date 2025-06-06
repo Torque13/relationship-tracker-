@@ -1,0 +1,54 @@
+{
+  "char_id": "{{char}}",
+  "personality": {
+    "agreeableness": 20,
+    "neuroticism": 80,
+    "boldness": 60
+  },
+  "metrics": {
+    "trust": {
+      "value": 0,
+      "trend": 0,
+      "decay": 0.05
+    },
+    "affection": {
+      "value": 0,
+      "trend": 0,
+      "decay": 0.02
+    },
+    "resentment": {
+      "value": 0,
+      "trend": 0,
+      "decay": -0.01
+    },
+    "protective": {
+      "value": 0,
+      "trend": 0,
+      "decay": 0.01
+    },
+    "physical_intimacy": {
+      "value": 0,
+      "trend": 0,
+      "decay": 0.01
+    },
+    "sexual_tension": {
+      "value": 0,
+      "trend": 0,
+      "decay": 0.04
+    },
+    "proximity_need": {
+      "value": 0,
+      "trend": 0,
+      "decay": 0.03
+    },
+    "body_lang_trust": {
+      "value": 0,
+      "trend": 0,
+      "decay": 0.02
+    }
+  },
+  "flags": {
+    "relationship_stage": "strangers"
+  },
+  "memories": []
+}
