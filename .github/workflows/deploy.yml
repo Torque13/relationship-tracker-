@@ -1,1 +1,27 @@
+name: build-and-deploy-stage
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4          # 1️⃣ fetches stage.zip
+      - name: Unzip stage bundle           # 2️⃣ explodes the archive
+        run: unzip '*.zip' -d .
+
+      - uses: actions/setup-node@v4        # 3️⃣ installs Node
+        with:
+          node-version: '21.7'
+          cache: 'yarn'
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+
+      - name: Publish to Chub              # 4️⃣ pushes build artifact
+        env:
+          CHUB_AUTH_TOKEN: ${{ secrets.CHUB_AUTH_TOKEN }}
+        run: npx chub-cli publish --stage dist
 
