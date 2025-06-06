@@ -1,29 +1,32 @@
 name: build-and-deploy-stage
 on:
   push:
-    branches: [main]
+    branches: [main]            # run on every push to main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4          # 1️⃣ fetches stage.zip
+      # 1️⃣  Check out the repo (pulls stage.zip)
+      - uses: actions/checkout@v4
+
+      # 2️⃣  Unzip the archive – “-o” forces overwrite, no prompt
       - name: Unzip stage bundle
         run: unzip -o '*.zip' -d .
 
-
-      - uses: actions/setup-node@v4        # 3️⃣ installs Node
+      # 3️⃣  Install the exact Node version the template expects
+      - uses: actions/setup-node@v4
         with:
-        node-version: '21.7.1'    # ⬅ must include the .1
-
+          node-version: '21.7.1'   # ← strict patch version
           cache: 'yarn'
 
+      # 4️⃣  Install deps & build
       - run: yarn install --frozen-lockfile
       - run: yarn build
 
-      - name: Publish to Chub              # 4️⃣ pushes build artifact
+      # 5️⃣  Publish the built stage to Chub
+      - name: Publish to Chub
         env:
           CHUB_AUTH_TOKEN: ${{ secrets.CHUB_AUTH_TOKEN }}
         run: npx chub-cli publish --stage dist
-
