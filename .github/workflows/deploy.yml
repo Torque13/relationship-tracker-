@@ -9,8 +9,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4          # 1️⃣ fetches stage.zip
-      - name: Unzip stage bundle           # 2️⃣ explodes the archive
-        run: unzip '*.zip' -d .
+      - name: Unzip stage bundle
+        run: unzip -o '*.zip' -d .
+
 
       - uses: actions/setup-node@v4        # 3️⃣ installs Node
         with:
